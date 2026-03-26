@@ -168,8 +168,8 @@ function extractHidden(html, name) {
 function parseAmisHtml(html, category, today) {
   const results = [];
   // 抓所有 <tr> 內容
-  const trRegex = /<tr[^>]*>([sS]*?)</tr>/gi;
-  const tdRegex = /<td[^>]*>([sS]*?)</td>/gi;
+  const trRegex = new RegExp('<tr[^>]*>([\\s\\S]*?)</tr>', 'gi');
+  const tdRegex = new RegExp('<td[^>]*>([\\s\\S]*?)</td>', 'gi');
   let trMatch;
   while ((trMatch = trRegex.exec(html)) !== null) {
     const cells = [];
