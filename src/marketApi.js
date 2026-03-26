@@ -45,6 +45,7 @@ const PRODUCT_ALIASES = {
   '楊桃': ['楊桃'],
   '草莓': ['草莓'],
   '奇異果': ['奇異果', '獼猴桃'],
+  '芭樂': ['芭樂', '番石榴'],
 };
 
 async function fetchMarketData({ forceRefresh = false } = {}) {
