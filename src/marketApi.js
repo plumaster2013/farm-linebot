@@ -97,7 +97,7 @@ function parseMoaResponse(data) {
       date:      (item['交易日期'] || '').replace(/\./g, '/'),
       category:  getCategoryName(item['種類代碼'] || ''),
     }))
-    .filter(d => d.name && d.name !== '休市' && d.avgPrice > 0);
+    .filter(d => d.name && d.name !== '休市' && d.avgPrice > 0 && (d.category === '蔬菜' || d.category === '水果'));
 }
 
 // ──────────────────────────────────────────
