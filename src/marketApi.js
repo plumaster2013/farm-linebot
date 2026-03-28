@@ -166,7 +166,7 @@ async function fetchAmisData() {
             console.log(`AMIS ${name}(${code}) 取得 ${items.length} 個市場`);
             return items;
           } catch (e) {
-            console.error(`AMIS 市場查詢失敗 ${code}: ${e.message}`);
+            console.error(`AMIS 市場查詢失敗 ${code}:`, e.code, e.message, String(e));
             return [];
           }
         })
@@ -174,7 +174,7 @@ async function fetchAmisData() {
       results.push(...marketResults.flat());
 
     } catch (err) {
-      console.error(`AMIS ${category} 失敗:`, err.message);
+      console.error(`AMIS ${category} 失敗:`, err.code, err.message, String(err));
     }
   }
   return results;
