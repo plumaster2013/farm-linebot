@@ -106,7 +106,7 @@ async function fetchAmisData() {
       // Phase 1a: GET 概覽頁取得 ViewState
       const getResp = await axios.get(overviewUrl, {
         headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
-        timeout: 30000,
+        timeout: 60000,
       });
       const html1  = getResp.data;
       const vs     = extractHidden(html1, '__VIEWSTATE');
@@ -125,7 +125,7 @@ async function fetchAmisData() {
           'Cookie':       cookie,
           'Referer':      overviewUrl,
         },
-        timeout: 35000,
+        timeout: 65000,
       });
       const productCodes = parseProductCodes(overviewResp.data, today);
       console.log(`AMIS ${category} 概覽共 ${productCodes.length} 個產品代碼`);
@@ -139,7 +139,7 @@ async function fetchAmisData() {
       // Phase 2a: GET 市場比較頁取得 ViewState
       const mktGetResp = await axios.get(marketUrl, {
         headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' },
-        timeout: 30000,
+        timeout: 60000,
       });
       const mktVs     = extractHidden(mktGetResp.data, '__VIEWSTATE');
       const mktVsg    = extractHidden(mktGetResp.data, '__VIEWSTATEGENERATOR');
@@ -160,7 +160,7 @@ async function fetchAmisData() {
                 'Cookie':       mktCookie,
                 'Referer':      marketUrl,
               },
-              timeout: 35000,
+              timeout: 65000,
             });
             const items = parseAmisMarketHtml(mktResp.data, name, category);
             console.log(`AMIS ${name}(${code}) 取得 ${items.length} 個市場`);
