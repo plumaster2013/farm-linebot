@@ -7,6 +7,17 @@
 const axios = require('axios');
 const cache = require('./cache');
 
+// 模擬瀏覽器 Headers，避免 AMIS 伺服器拒絕非瀏覽器請求
+const BROWSER_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+  'Accept-Language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
+  'Accept-Encoding': 'gzip, deflate, br',
+  'Connection': 'keep-alive',
+  'Upgrade-Insecure-Requests': '1',
+};
+
+
 const MOA_API = 'https://data.moa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx';
 const AMIS_FRUIT_URL        = 'https://amis.afa.gov.tw/fruit/FruitProdDayTransInfo.aspx';
 const AMIS_FRUIT_MARKET_URL = 'https://amis.afa.gov.tw/fruit/FruitMarketTransInfoCP.aspx';
@@ -61,7 +72,7 @@ async function fetchMarketData({ forceRefresh = false } = {}) {
 // ──────────────────────────────────────────
 async function fetchMoaData() {
   try {
-    const resp = await axios.get(MOA_API, { params: { '$top': 1000 }, timeout: 30000 });
+    const resp = await axios.get(MOA_API, { params: { '$top': 5000 }, timeout: 30000 });
     return parseMoaResponse(resp.data);
   } catch (err) {
     console.error('MOA API 失敗:', err.message);
